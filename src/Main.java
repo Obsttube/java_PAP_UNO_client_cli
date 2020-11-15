@@ -58,7 +58,7 @@ public class Main {
                     System.out.println(serverRequest.requestType);
                     switch(serverRequest.requestType){
                         case YOUR_TURN: {
-                            System.out.println("Select a card:");
+                            System.out.println("Select a card (-1 = get card from a pile and skip your move):");
                             String line = userInputReader.readLine();
                             //System.out.println(line);
                             int selectedCard = Integer.parseInt(line);
