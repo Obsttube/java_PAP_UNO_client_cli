@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class ServerRequest implements Serializable{
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 3L;
 
     public final RequestType requestType;
 
@@ -13,7 +13,8 @@ public class ServerRequest implements Serializable{
         LIST_OF_PLAYERS,
         YOUR_CARDS,
         YOUR_TURN,
-        ILLEGAL_MOVE  // repeat with a legal move
+        ILLEGAL_MOVE, // repeat with a legal move
+        CHOOSE_COLOR
     }
 
     /* Request fields */
@@ -21,6 +22,7 @@ public class ServerRequest implements Serializable{
     public List<Player> players;
     public List<Card> cardsOnHand;
     public Card cardOnTable;
+    public Card.Color currentWildColor;
 
     public ServerRequest(RequestType requestType) {
         this.requestType = requestType;

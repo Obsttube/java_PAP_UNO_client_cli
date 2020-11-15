@@ -57,15 +57,42 @@ public class Main {
                     serverRequest = (ServerRequest)objectInputStream.readObject();
                     System.out.println(serverRequest.requestType);
                     switch(serverRequest.requestType){
-                        case YOUR_TURN:
+                        case YOUR_TURN: {
                             System.out.println("Select a card:");
                             String line = userInputReader.readLine();
-                            System.out.println(line);
+                            //System.out.println(line);
                             int selectedCard = Integer.parseInt(line);
                             clientRequest = new ClientRequest(ClientRequest.RequestType.CHOOSE_CARD);
                             clientRequest.choosenCardIndex = selectedCard;
                             objectOutputStream.writeObject(clientRequest);
                             break;
+                        }
+                        case CHOOSE_COLOR: {
+                            System.out.println("Choose a color for your wild card (0 = RED, 1 = YELLOW, 2 = GREEN, 3 = BLUE):");
+                            String line = userInputReader.readLine();
+                            //System.out.println(line);
+                            int selectedCard = Integer.parseInt(line);
+                            clientRequest = new ClientRequest(ClientRequest.RequestType.CHOOSE_COLOR);
+                            Card.Color color = null;
+                            switch(selectedCard){
+                                case 0:
+                                    color = Card.Color.RED;
+                                    break;
+                                case 1:
+                                    color = Card.Color.YELLOW;
+                                    break;
+                                case 2:
+                                    color = Card.Color.GREEN;
+                                    break;
+                                case 3:
+                                    color = Card.Color.BLUE;
+                                    break;
+                                default:
+                            }
+                            clientRequest.choosenColor = color;
+                            objectOutputStream.writeObject(clientRequest);
+                            break;
+                        }
                         case ILLEGAL_MOVE:
                             System.out.println("Illegal move! (It wasn't accepted)");
                             break;
@@ -89,6 +116,9 @@ public class Main {
                                 System.out.print(card.type + "-" + card.color + " ");
                             }
                             System.out.println("}");
+                            Card.Color currentWildColor = serverRequest.currentWildColor;
+                            if(currentWildColor != null)
+                                System.out.println("Current wild color: " + currentWildColor);
                             break;
                         default:
                             break;
