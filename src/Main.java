@@ -66,6 +66,9 @@ public class Main {
                             clientRequest.choosenCardIndex = selectedCard;
                             objectOutputStream.writeObject(clientRequest);
                             break;
+                        case ILLEGAL_MOVE:
+                            System.out.println("Illegal move! (It wasn't accepted)");
+                            break;
                         case LIST_OF_PLAYERS:
                             List<Player> players2 = serverRequest.players;
                             System.out.print("{ ");
