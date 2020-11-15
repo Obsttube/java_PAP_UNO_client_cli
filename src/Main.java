@@ -103,6 +103,7 @@ public class Main {
                                 System.out.print(player.name + " ");
                             }
                             System.out.println("}");
+                            System.out.println("Write START to begin.");
                             break;
                         case YOUR_CARDS:
                             Card table = serverRequest.cardOnTable;
